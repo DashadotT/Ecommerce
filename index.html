@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ORPHIC Build Zone - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body,
+    html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', sans-serif;
+        height: 100%;
+    }
+
+    body {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    /* Main section background image */
+    main {
+        background-image: url('photos/Component 4.png');
+        min-height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    nav {
+        width: 100%;
+        background-color: #141d4e;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .navbar {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 15rem;
+    }
+
+    nav img {
+        max-height: 60px;
+        margin: 0 20px;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        padding: 0 15px;
+        font-weight: bold;
+    }
+
+    .navbar-links {
+        display: flex;
+        gap: 5rem;
+    }
+
+    /* LOGIN BOX */
+    .login-box {
+        background: rgb(255, 255, 255);
+        border-radius: 15px;
+        width: 800px;
+        max-width: 95%;
+        display: flex;
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .left-image {
+        flex: 1;
+        background-color: #ffffff;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .left-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .left-image .inner-logo {
+        position: absolute;
+        max-width: 100px;
+        bottom: 20px;
+        left: 20px;
+    }
+
+    /* FORM AREA */
+    .form-area {
+        flex: 1;
+        padding: 40px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .form-area h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #1c1c1c;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    .password-wrapper {
+        position: relative;
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 12px;
+        background-color: #305A82;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        margin-top: 10px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .forgot-password {
+        display: block;
+        text-align: right;
+        margin: 10px 0;
+        color: #305A82;
+        text-decoration: none;
+        font-size: 13px;
+    }
+
+    .social-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .facebook-btn,
+    .google-btn {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .signup-text {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .orphic-footer {
+        background-color: #f9f9f9;
+        color: #333;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding-top: 40px;
+    }
+
+    .footer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0 60px 40px;
+    }
+
+    .footer-section {
+        flex: 1 1 220px;
+        margin: 15px;
+    }
+
+    .footer-section h3 {
+        font-size: 16px;
+        margin-bottom: 12px;
+        color: #222;
+    }
+
+    .footer-section p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .footer-section ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-section ul li {
+        margin-bottom: 8px;
+    }
+
+    .footer-section ul li a {
+        color: #333;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .footer-section ul li a:hover {
+        text-decoration: underline;
+    }
+
+    .footer-icons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .footer-icons img {
+        height: 25px;
+        max-width: 100px;
+    }
+
+    .footer-bottom {
+        background-color: #e9eef6;
+        padding: 20px 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        font-size: 14px;
+    }
+
+    .footer-bottom .social {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .footer-bottom .social span {
+        font-weight: 600;
+        margin-right: 5px;
+    }
+
+    .footer-bottom .social img {
+        height: 20px;
+        width: 20px;
+    }
+</style>
+
+<body>
+
+    <nav>
+        <div class="navbar">
+            <img src="https://c.animaapp.com/maksq8u46pByZ6/img/logo.png" alt="Orphic Logo">
+            <div class="navbar-links">
+                <div>
+                    <a href="Home.html">Help?</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="login-box">
+            <div class="left-image">
+                <img src="photos/BG.jpg" alt="Gaming Setup">
+            </div>
+
+
+            <div class="form-area">
+                <h2>Log In</h2>
+                <form id="loginForm">
+                    <input type="text" name="username" placeholder="Email / Phone number" required>
+                    <div class="password-wrapper">
+                        <input type="password" name="password" id="passwordInput" placeholder="Password" required>
+                        <span class="toggle-password" onclick="togglePassword()"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                <path
+                                    d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
+                                <path
+                                    d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
+                            </svg></span>
+                    </div>
+                    <button type="submit" class="login-btn">LOG IN</button>
+                </form>
+
+                <a href="#" class="forgot-password">Forgot Password</a>
+                <div class="social-buttons">
+                    <button class="facebook-btn">Facebook</button>
+                    <button class="google-btn">Google</button>
+                </div>
+                <p class="signup-text">Don’t have account? <a href="#">Sign Up</a></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="orphic-footer">
+        <div class="footer-container">
+            <div class="footer-section about">
+                <h3>ABOUT US</h3>
+                <p>ORPHIC is an eCommerce platform based in the Philippines, designed to serve the growing community of
+                    PC builders, gamers, and tech enthusiasts. It empowers users to build their own custom PCs with
+                    confidence by offering essential tools. ORPHIC aims to become the go-to destination for reliable,
+                    beginner-friendly PC building solutions that combine both function and convenience.</p>
+            </div>
+
+            <div class="footer-section payments">
+                <h3>PAYMENT METHODS</h3>
+                <div class="footer-icons">
+                    <img src="https://c.animaapp.com/maixeniyECsT9y/img/gcash-logo-500x281-1.png" alt="GCash">
+                    <img src="https://c.animaapp.com/maixeniyECsT9y/img/image-5.png" alt="PayMaya">
+                    <img src="https://c.animaapp.com/maixeniyECsT9y/img/image-6.png" alt="BPI">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
+                </div>
+            </div>
+
+            <div class="footer-section logistics">
+                <h3>LOGISTICS</h3>
+                <div class="footer-icons">
+                    <img src="https://c.animaapp.com/maixeniyECsT9y/img/flash-express-malaysia-1634103999-removebg-preview-1.png"
+                        alt="Flash Express">
+                    <img src="https://c.animaapp.com/maixeniyECsT9y/img/648px-j-t-express-logo-svg-removebg-preview-1.png"
+                        alt="J&T Express">
+                    <img src="https://c.animaapp.com/maixeniyECsT9y/img/ninjavan-svg-1.png" alt="Ninja Van">
+                    <img src="https://c.animaapp.com/maixeniyECsT9y/img/2go-travel-logo--2018--svg-1.png"
+                        alt="2GO Express">
+                </div>
+            </div>
+
+            <div class="footer-section service">
+                <h3>CUSTOMER SERVICE</h3>
+                <ul>
+                    <li><a href="#">Help Centre</a></li>
+                    <li><a href="#">Payment Methods</a></li>
+                    <li><a href="#">Order Tracking</a></li>
+                    <li><a href="#">Free Shipping</a></li>
+                    <li><a href="#">Return & Refund</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="social">
+                <span>FOLLOW US</span>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+                        alt="Instagram"></a>
+                <a href="#"><img src="https://c.animaapp.com/maixeniyECsT9y/img/image-9.png" alt="Twitter"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
+                        alt="LinkedIn"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg"
+                        alt="Facebook"></a>
+            </div>
+            <p>&copy; Orphic2025. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById("passwordInput");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+            } else {
+                passwordInput.type = "password";
+            }
+        }
+
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const username = this.username.value.trim();
+            const password = this.password.value.trim();
+
+            // Simulate login validation
+            if (username === "joeroz@gmail.com" && password === "password123") {
+                //alert("Login successful!");
+                // Redirect or perform post-login logic here
+                window.location.href = "Home.html";
+            } else {
+                alert("Invalid credentials. Try again.");
+            }
+        });
+    </script>
+
+</body>
+
+</html>
