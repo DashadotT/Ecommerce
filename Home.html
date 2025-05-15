@@ -14,9 +14,8 @@
             scroll-behavior: smooth;
         }
 
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             background-color: #f8f9fa;
             color: #333;
         }
@@ -24,6 +23,9 @@
         nav {
             width: 100%;
             background-color: #141d4e;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .navbar {
@@ -80,20 +82,17 @@
             font-size: 1em;
         }
 
-        .cart-icon {
-            font-size: 26px;
-            cursor: pointer;
-            color: black;
-            background-color: yellow;
+        .carticon {
+            background-color: #e4852b;
             border-radius: 50%;
-            padding: 10px;
+            width: 50px;
+            height: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 50px;
-            height: 50px;
-            z-index: 2;
+            text-decoration: none;
         }
+
 
         .slogan {
             position: absolute;
@@ -111,23 +110,11 @@
             /* Bright gamer-style orange */
         }
 
-        section {
-            margin: 0 15rem;
-            padding-left: 20px;
-        }
-
-        .deals {
-            color: #141d4e;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-
         main {
             margin: 0 15rem;
-            padding: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
+            padding-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
 
@@ -155,8 +142,8 @@
         }
 
         .product-price {
-            color: #007bff;
-            font-weight: bold;
+            color: #000000;
+            font-weight: normal;
             margin-top: 5px;
         }
 
@@ -166,7 +153,7 @@
 
         .buy-button,
         .add-to-cart-button {
-            background-color: #007bff;
+            background-color: #4354b6;
             color: white;
             padding: 8px 15px;
             border: none;
@@ -177,7 +164,18 @@
         }
 
         .add-to-cart-button {
-            background-color: #28a745;
+            background-color: #e4852b;
+        }
+
+        /* Hover styles */
+        .buy-button:hover {
+            background-color: #2f3c8e;
+            /* Darker shade of #4354b6 */
+        }
+
+        .add-to-cart-button:hover {
+            background-color: #c26d1a;
+            /* Darker shade of #e4852b */
         }
 
         .orphic-footer {
@@ -299,7 +297,136 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        @media (max-width: 1024px) {
+
+            .navbar,
+            .searchandcart,
+            main,
+            section {
+                padding: 0 1rem;
+            }
+
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .navbar-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .searchandcart {
+                flex-direction: column;
+                align-items: flex-start;
+                height: auto;
+                padding: 2rem 1rem;
+            }
+
+            .slogan {
+                position: static;
+                font-size: 1.8rem;
+                margin-top: 1rem;
+            }
+
+            .search-bar input[type="text"] {
+                height: 40px;
+            }
+
+            .product-card {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                padding: 0 1rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        /* Custom Cart Modal */
+        .custom-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(20, 20, 20, 0.6);
+        }
+
+        .custom-modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .custom-modal-content p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .custom-modal-button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #141d4e;
+            color: white;
+            transition: 0.2s ease-in-out;
+        }
+
+        .custom-modal-button.cancel {
+            background-color: #6c757d;
+        }
+
+        .custom-modal-button:hover {
+            transform: scale(1.05);
+        }
+
+        .custom-close {
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .custom-close:hover {
+            color: black;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
+
 </head>
 
 <body>
@@ -325,8 +452,12 @@
             <input type="text" id="searchInput" placeholder="Search...">
 
         </div>
-        <a href="Cart.html">
-            <span class="cart-icon">&#128722;</span>
+        <a href="Cart.html" class="carticon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-cart-fill"
+                viewBox="0 0 16 16">
+                <path
+                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+            </svg>
         </a>
         <div class="slogan">
             <h2>
@@ -337,10 +468,6 @@
         </div>
 
     </div>
-
-    <section class="deals">
-        <h2>Today's deals</h2>
-    </section>
 
     <div id="accountModal">
         <div id="accountModalContent">
@@ -420,6 +547,16 @@
         </div>
     </footer>
 
+    <div id="cartModal" class="custom-modal">
+        <div class="custom-modal-content">
+            <span class="custom-close" onclick="closeCartModal()">&times;</span>
+            <p id="cartModalMessage"></p>
+            <button onclick="goToCart()" class="custom-modal-button">Go to Cart</button>
+            <button onclick="closeCartModal()" class="custom-modal-button cancel">Continue Shopping</button>
+        </div>
+    </div>
+
+
     <script>
         fetch('Home.json')
             .then(response => response.json())
@@ -447,16 +584,31 @@
                     const product = products.find(p => p.id === productId);
                     if (product) {
                         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                        if (!cart.some(item => item.id === product.id)) {
+                        const alreadyInCart = cart.some(item => item.id === product.id);
+                        if (!alreadyInCart) {
                             cart.push(product);
-                            alert(`${product.title} is successfully added to your cart.`);
+                            showCartModal(`${product.title} was added to your cart.`);
                         } else {
-                            alert(`${product.title} is already in your cart.`);
+                            showCartModal(`${product.title} is already in your cart.`);
                         }
                         localStorage.setItem('cart', JSON.stringify(cart));
                     }
                 });
         }
+
+        function showCartModal(message) {
+            document.getElementById('cartModalMessage').innerText = message;
+            document.getElementById('cartModal').style.display = 'block';
+        }
+
+        function closeCartModal() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        function goToCart() {
+            window.location.href = 'Cart.html';
+        }
+
 
         function goToProductPage(productId) {
             window.location.href = 'product-page.html?id=' + productId;
@@ -488,19 +640,19 @@
 
         let allProducts = [];
 
-    fetch('Home.json')
-        .then(response => response.json())
-        .then(data => {
-            allProducts = data;
-            renderProducts(allProducts);
-        });
+        fetch('Home.json')
+            .then(response => response.json())
+            .then(data => {
+                allProducts = data;
+                renderProducts(allProducts);
+            });
 
-    function renderProducts(products) {
-        const main = document.getElementById('product-list');
-        main.innerHTML = ''; // Clear existing products
+        function renderProducts(products) {
+            const main = document.getElementById('product-list');
+            main.innerHTML = ''; // Clear existing products
 
-        products.forEach(product => {
-            const card = `
+            products.forEach(product => {
+                const card = `
                 <div class="product-card">
                     <img src="${product.image}" alt="${product.title}" class="product-image">
                     <div class="product-title">${product.title}</div>
@@ -510,17 +662,17 @@
                     <button class="buy-button" onclick="goToProductPage('${product.id}')">Buy Now</button>
                 </div>
             `;
-            main.innerHTML += card;
-        });
-    }
+                main.innerHTML += card;
+            });
+        }
 
         document.getElementById('searchInput').addEventListener('input', function () {
-        const query = this.value.toLowerCase();
-        const filtered = allProducts.filter(product =>
-            product.title.toLowerCase().includes(query)
-        );
-        renderProducts(filtered);
-    });
+            const query = this.value.toLowerCase();
+            const filtered = allProducts.filter(product =>
+                product.title.toLowerCase().includes(query)
+            );
+            renderProducts(filtered);
+        });
     </script>
 
 </body>
